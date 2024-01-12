@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productos",
+  "info": {
+    "singularName": "producto",
+    "pluralName": "productos",
+    "displayName": "producto"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Receta": {
+      "type": "string",
+      "required": false
+    },
+    "Precio": {
+      "type": "string",
+      "required": true
+    },
+    "cantidad": {
+      "type": "integer"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "categoria": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "blocks"
+    },
+    "imagen": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Receta"
+    },
+    "inicio": {
+      "type": "date"
+    },
+    "termina": {
+      "type": "date"
+    }
+  }
+}
