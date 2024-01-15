@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recetas",
+  "info": {
+    "singularName": "receta",
+    "pluralName": "recetas",
+    "displayName": "receta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nombre": {
+      "type": "string",
+      "required": true
+    },
+    "costo_total": {
+      "type": "biginteger"
+    },
+    "ingredientes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ingrediente.ingrediente",
+      "mappedBy": "recetas"
+    }
+  }
+}

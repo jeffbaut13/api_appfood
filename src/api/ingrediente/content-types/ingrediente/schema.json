@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredientes",
+  "info": {
+    "singularName": "ingrediente",
+    "pluralName": "ingredientes",
+    "displayName": "ingrediente",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nombre": {
+      "type": "string",
+      "required": true
+    },
+    "cantidad_compra": {
+      "type": "integer"
+    },
+    "precio_compra_insumo": {
+      "type": "biginteger"
+    },
+    "precio_unitario": {
+      "type": "biginteger"
+    },
+    "unidad_de_medida": {
+      "type": "string"
+    },
+    "recetas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::receta.receta",
+      "inversedBy": "ingredientes"
+    }
+  }
+}

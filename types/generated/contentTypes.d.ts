@@ -362,45 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiProductoProducto extends Schema.CollectionType {
-  collectionName: 'productos';
-  info: {
-    singularName: 'producto';
-    pluralName: 'productos';
-    displayName: 'producto';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Receta: Attribute.String;
-    Precio: Attribute.String & Attribute.Required;
-    cantidad: Attribute.Integer;
-    sku: Attribute.String;
-    categoria: Attribute.String;
-    descripcion: Attribute.Blocks;
-    imagen: Attribute.Media;
-    slug: Attribute.UID<'api::producto.producto', 'Receta'>;
-    inicio: Attribute.Date;
-    termina: Attribute.Date;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::producto.producto',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::producto.producto',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -807,6 +768,122 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiIngredienteIngrediente extends Schema.CollectionType {
+  collectionName: 'ingredientes';
+  info: {
+    singularName: 'ingrediente';
+    pluralName: 'ingredientes';
+    displayName: 'ingrediente';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nombre: Attribute.String & Attribute.Required;
+    cantidad_compra: Attribute.Integer;
+    precio_compra_insumo: Attribute.BigInteger;
+    precio_unitario: Attribute.BigInteger;
+    unidad_de_medida: Attribute.String;
+    recetas: Attribute.Relation<
+      'api::ingrediente.ingrediente',
+      'manyToMany',
+      'api::receta.receta'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ingrediente.ingrediente',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ingrediente.ingrediente',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductoProducto extends Schema.CollectionType {
+  collectionName: 'productos';
+  info: {
+    singularName: 'producto';
+    pluralName: 'productos';
+    displayName: 'plato';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Receta: Attribute.String;
+    Precio: Attribute.String & Attribute.Required;
+    cantidad: Attribute.Integer;
+    sku: Attribute.String;
+    categoria: Attribute.String;
+    descripcion: Attribute.Blocks;
+    imagen: Attribute.Media;
+    slug: Attribute.UID<'api::producto.producto', 'Receta'>;
+    inicio: Attribute.Date;
+    termina: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRecetaReceta extends Schema.CollectionType {
+  collectionName: 'recetas';
+  info: {
+    singularName: 'receta';
+    pluralName: 'recetas';
+    displayName: 'receta';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nombre: Attribute.String & Attribute.Required;
+    costo_total: Attribute.BigInteger;
+    ingredientes: Attribute.Relation<
+      'api::receta.receta',
+      'manyToMany',
+      'api::ingrediente.ingrediente'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::receta.receta',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::receta.receta',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -817,7 +894,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::producto.producto': ApiProductoProducto;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -826,6 +902,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::ingrediente.ingrediente': ApiIngredienteIngrediente;
+      'api::producto.producto': ApiProductoProducto;
+      'api::receta.receta': ApiRecetaReceta;
     }
   }
 }
